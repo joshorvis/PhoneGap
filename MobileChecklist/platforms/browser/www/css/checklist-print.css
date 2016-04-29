@@ -1,0 +1,8 @@
+.ui-resizable {
+  height: 100% !important;
+}
+.form-newChecklistItem,
+.controls-checklist,
+.controls-listItem {
+  display: none !important;
+}

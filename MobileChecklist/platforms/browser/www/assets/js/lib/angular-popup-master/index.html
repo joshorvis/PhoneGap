@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Angular popup</title>
+    <link type="text/css" rel="stylesheet" media="all" href="node_modules/bootstrap/dist/css/bootstrap.min.css">
+    <link type="text/css" rel="stylesheet" media="all" href="popup/angular.popup.css">
+    <link type="text/css" rel="stylesheet" media="all" href="style.css">
+
+    <script src="node_modules/angular/angular.min.js"></script>
+    <script src="node_modules/angular-sanitize/angular-sanitize.min.js"></script>
+
+    <script src="popup/angular.popup.min.js"></script>
+    <script src="app.js"></script>
+</head>
+<body ng-app="app" ng-controller="mainCtrl">
+
+<div class="container">
+    <h3>Angular popup examples</h3>
+    <p>&nbsp;</p>
+    <h4 class="text-muted">Example #1</h4>
+    <p>
+        <button class="btn btn-primary" ng-click="firstExample()">Open simple popup</button>
+    </p>
+
+    <h4 class="text-muted">Example #2</h4>
+    <p>
+        <button class="btn btn-primary" ng-click="secondExample()">Open confirmation popup</button>
+    </p>
+
+    <h4 class="text-muted">Example #3</h4>
+    <p>
+        <button class="btn btn-primary" ng-click="thirdExample()">Open confirmation popup with input</button>
+    </p>
+</div>
+
+</body>
+</html>

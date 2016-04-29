@@ -20,6 +20,8 @@ var app = {
     // Application Constructor
     initialize: function() {
         this.bindEvents();
+		/*var appWrapper = document.getElementById('appWrapper');
+		appWrapper.setAttribute('style', 'display:block;');*/
     },
     // Bind Event Listeners
     //
@@ -34,6 +36,7 @@ var app = {
     // function, we must explicitly call 'app.receivedEvent(...);'
     onDeviceReady: function() {
         app.receivedEvent('deviceready');
+
     },
     // Update DOM on a Received Event
     receivedEvent: function(id) {

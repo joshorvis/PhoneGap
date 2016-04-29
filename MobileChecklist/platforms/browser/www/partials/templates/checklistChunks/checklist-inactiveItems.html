@@ -1,0 +1,22 @@
+<h4>Inactive Items</h4>
+<ul class="list-checklist list-checklist-inactive">
+	<li class="checklistItemNode" ng-repeat="item in inactiveClItems">
+		<div class="container-checklistItem">
+			<div class="controls-listItem">
+				<i class="fa fa-times-circle fake-link" ng-click="deleteChecklistItem(item)" title="Delete Item"></i>
+			</div>
+
+			<div class="item-content">
+				<div>
+					<input type="checkbox" ng-model="item.completed" ng-change="markChecklistItem(item)">
+				</div>
+				<div class="item-text">
+					<div class="item-name noSelect" ng-show="!item.editMode">{{item.name}}</div>
+					<div class="item-desc noSelect" ng-show="!item.editMode && item.desc">{{item.desc}}</div>
+					<div class="item-dateDue noSelect" ng-show="!item.editMode && item.dateDue">{{item.dateDue}}</div>
+					<div class="item-dateCreate noSelect" ng-show="!item.editMode && item.dateCreated && item.showDetails">{{item.dateCreated | date:'short'}}</div>
+				</div>
+			</div>
+		</div>
+	</li>
+</ul>

@@ -1,0 +1,18 @@
+<div class="checklist-ownership-indicator" ng-bind-html="getRightsIcon() | renderHTML"></div>
+
+<span class="controls-checklist">
+	<span class="btn-group" data-toggle="buttons-checkbox">
+		<!--<button type="button" class="btn btn-info" ng-click="checklistSettingToggle('showChecklistEdit')" title="Edit Checklist Info"><i class="fa fa-fw fa-pencil"></i></button>-->
+		<button type="button" class="btn" ng-click="checklistSettingToggle('showShareControls')" title="Show Sharing Controls" ng-if="listIsOwned()" ng-class="{'btn-success':isListShared(),'btn-info':!isListShared()}"><i class="fa fa-fw fa-user-plus"></i></button>
+		<button type="button" class="btn btn-info" ng-click="checklistSettingToggle('showQuickEntry')" title="Show Advanced Entry Form" ng-if="canListManage()"><i class="fa fa-fw fa-bolt"></i></button>
+		<button type="button" class="btn btn-info" ng-click="checklistSettingToggle('showInactiveItems')" title="Show Inactive Items"><i class="fa fa-fw fa-check-square-o"></i></button>
+		<button type="button" class="btn btn-info" ng-click="checklistSettingToggle('showListDetails')" title="Show List Info"><i class="fa fa-fw fa-info-circle"></i></button>
+	</span>
+	<button type="button" class="btn btn-info" ng-click="convertChecklistToJobBranch()" title="Convert Item to Job" ng-if="!mobile"><i class="fa fa-external-link fake-link"></i></button>
+	<button type="button" class="btn btn-info" ng-click="openPrintableChecklist(checklistId)" title="Print" ng-if="!mobile"><i class="fa fa-print fake-link"></i></button>
+
+	<button type="button" class="btn btn-danger" ng-click="deleteChecklist()" title="Delete Checklist" ng-if="listIsOwned()"><i class="fa fa-fw fa-trash-o"></i></button>
+</span>
+
+<h3>{{checklist.name}} <span ng-show="checklist.archived">(archived)</span></h3>
+<div class="checklist-description prewrap" ng-show="checklist.desc">{{checklist.desc}}</div>

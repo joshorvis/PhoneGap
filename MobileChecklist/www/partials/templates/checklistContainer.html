@@ -1,0 +1,39 @@
+<div class="container-checklists">
+
+	<div class="form-newChecklist">
+		<span ng-show="isCornerToggle('newForm')">
+			<form name="newChecklistForm" ng-submit="addNewChecklist()"><input type="text" ng-model="newChecklist.name" placeholder="New checklist name" /> <button class="btn btn-success" type="submit">Add</button></form>
+		</span>
+		<span ng-show="isCornerToggle('search')">
+			<input type="text" ng-model="checklistContainerSettings.filter.name" placeholder="Filter lists by name" />
+		</span>
+		<span class="btn-group" data-toggle="buttons-radio">
+			<button type="button" class="btn btn-info" ng-click="setCornerToggle('search')" ng-class="{active:isCornerToggle('search')}"><i class="fa fa-search"></i></button>
+			<button type="button" class="btn btn-info" ng-click="setCornerToggle('newForm')" ng-class="{active:isCornerToggle('newForm')}"><i class="fa fa-plus"></i></button>
+		</span>
+	</div>
+	<div class="control-sortingSwitch">
+		<span>Sorting: </span><switch ng-model="userPrefs.checklistSortingEnabled" on="Enabled" off="Disabled" class="wide blue"></switch>
+	</div>
+	<div class="pfPage-heading">Your Checklists</div>
+
+	<tabs>
+		<pane title="Lists you own">
+			<ul class="container-list-checklists" pf-sortable onupdate="updateMyOwnedChecklistOrder">
+				<li checklist ng-repeat="cl in myOwnedLists | filter: checklistContainerSettings.filter" id="ownedChecklist-{{$index}}" style=" {{(checklist.width ? 'width:'+checklist.width+'px' : '')}}" pf-resizable handles="e" onstop="onResizeWidthStop" minwidth="160" cancelselector=".sortable-false, input, textarea, button, i"></li>
+			</ul>
+			<div ng-if="firebaseConnected && !loadingOwned && !myOwnedLists.length">You do not own any lists</div>
+			<div ng-if="loadingOwned">Loading...</div>
+		</pane>
+		<pane title="Lists shared with you">
+			<ul class="container-list-checklists" pf-sortable onupdate="updateMySharedChecklistOrder" onreceive="receiveChecklistItem" onremove="removeChecklistItem">
+				<li checklist ng-repeat="cl in mySharedLists | filter: checklistContainerSettings.filter" id="sharedChecklist-{{$index}}"></li>
+			</ul>
+			<div ng-show="firebaseConnected && !loadingShared && !mySharedLists.length">You do not have any shared lists</div>
+			<div ng-if="loadingShared">Loading...</div>
+		</pane>
+	</tabs>
+	<div ng-if="!firebaseConnected">Connecting and loading data</div>
+</div>
+
+<div item-to-job-converter class="modal fade in hide pfWindow-editor" id="pfWindow-itemToJobConverter"></div>

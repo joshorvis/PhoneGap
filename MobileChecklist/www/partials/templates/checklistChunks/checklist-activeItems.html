@@ -1,0 +1,60 @@
+<!--<button ng-click="showItemPath = !showItemPath">Toggle Item Paths</button>-->
+
+<ul ui-tree-nodes="" ng-model="clItems" class="list-checklist list-checklist-active sortable-false">
+	<li ng-if="canListManage()" class="form-newChecklistItem sortable-false" ng-class="{'checklist-advanced-entry':!checklistSettings.showQuickEntry}">
+		<form name="newChecklistItemForm" ng-submit="addNewChecklistItem()">
+			<input type="text" ng-model="newChecklistItem.name" placeholder="{{checklistSettings.showQuickEntry ? 'New item' : 'New item name'}}" />
+				<span ng-show="!checklistSettings.showQuickEntry">
+					<textarea ng-model="newChecklistItem.desc" placeholder="Description"></textarea>
+					<input type="text" ng-model="newChecklistItem.dateDue" placeholder="Due date" ui-date="{ dateFormat: 'mm/dd/y', defaultDate: null }" autocomplete="off">
+				</span>
+			<button class="btn btn-success" type="submit">Add</button>
+		</form>
+	</li>
+	<li ui-tree-node class="checklistItemNode" ng-repeat="item in clItems" parent-list="cl" checklist-item="item" checklist-item-parent="checklistId" id="clItem-{{item.$id}}" ng-show="checklistSettings.showInactiveItems || !item.completed" checklist-settings="checklistSettings">
+
+	</li>
+</ul>
+
+<!--<ul pf-sortable onupdate="updateChecklistItemOrder" onreceive="receiveChecklistItem" crossover=".list-checklist-active" class="list-checklist list-checklist-active" ng-class="{'sortable-false':!canListManage()}">
+	<li ng-if="canListManage()" class="form-newChecklistItem sortable-false" ng-class="{'checklist-advanced-entry':!checklistSettings.showQuickEntry}">
+		<form name="newChecklistItemForm" ng-submit="addNewChecklistItem()">
+			<input type="text" ng-model="newChecklistItem.name" placeholder="{{checklistSettings.showQuickEntry ? 'New item' : 'New item name'}}" />
+		<span ng-show="!checklistSettings.showQuickEntry">
+			<textarea ng-model="newChecklistItem.desc" placeholder="Description"></textarea>
+			<input type="text" ng-model="newChecklistItem.dateDue" placeholder="Due date" ui-date="{ dateFormat: 'mm/dd/y', defaultDate: null }" autocomplete="off">
+		</span>
+			<button class="btn btn-success" type="submit">Add</button>
+		</form>
+	</li>
+	<li ng-repeat="item in clItems" id="clItem-{{item.$id}}" ng-dblclick="editChecklistItem(item)">
+		<div class="controls-listItem" ng-show="!item.editMode">
+			&lt;!&ndash;<i class="fa fa-plus fake-link" ng-click="addSubitem(item)" title="Add Subitem" ng-if="canListManage()"></i>&ndash;&gt;
+			<i class="fa fa-pencil fake-link" ng-click="editChecklistItem(item)" title="Edit Item" ng-if="canListManage()"></i>
+			<i class="fa fa-external-link fake-link" ng-click="convertItemToJob(item)" title="Convert Item to Job" ng-if="!mobile"></i>
+			<i class="fa fa-times-circle fake-link" ng-click="deleteChecklistItem(item)" title="Delete Item" ng-if="canListManage()"></i>
+		</div>
+		<div class="item-content">
+			<div>
+				<input type="checkbox" ng-model="item.completed" ng-change="markChecklistItem(item)" ng-disabled="listReadOnly()" class="sortable-false">
+			</div>
+			<div class="item-text">
+				<div class="item-name noSelect" ng-show="!item.editMode">{{item.name}}</div>
+				<div class="item-desc noSelect" ng-show="!item.editMode && item.desc">{{item.desc}}</div>
+				<div class="item-dateDue noSelect" ng-show="!item.editMode && item.dateDue"><span ng-bind-html="getStatusIndicator(item.dateDue) | renderHTML"></span> {{item.dateDue | date:'shortDate'}}</div>
+				<div class="item-dateCreate noSelect" ng-show="!item.editMode && item.dateCreated && item.showDetails">{{item.dateCreated | date: 'short'}}</div>
+				<div class="item-dateUpdate noSelect" ng-show="!item.editMode && item.dateUpdated && item.showDetails">{{item.dateUpdated | date: 'short'}}</div>
+			<span ng-show="item.editMode">
+				<form name="editChecklistItemForm" ng-submit="saveChecklistItem(item)">
+					<input type="text" ng-model="item.name" placeholder="Item Name" />
+					<textarea ng-model="item.desc" placeholder="Description"></textarea>
+					<input type="text" ng-model="item.dateDue" placeholder="Due date" ui-date="{ dateFormat: 'mm/dd/y', defaultDate: null }" autocomplete="off">
+
+					<button class="btn btn-success" type="submit">Save</button>
+					<button class="btn" type="button" ng-click="cancelEditChecklistItem(item)">Cancel</button>
+				</form>
+			</span>
+			</div>
+		</div>
+	</li>
+</ul>-->

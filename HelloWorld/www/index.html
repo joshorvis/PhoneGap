@@ -38,23 +38,81 @@
     -->
     <!-- <meta http-equiv="Content-Security-Policy" content="default-src 'self' data: gap: 'unsafe-inline' https://ssl.gstatic.com; style-src 'self' 'unsafe-inline'; media-src *" /> -->
 
-    <link rel="stylesheet" type="text/css" href="css/index.css" />
-    <title>Hello World</title>
+	<script type="text/javascript" src="js/lib/angular-1.3.15.js"></script>
+
+    <link rel="stylesheet" type="text/css" href="css/app.css" />
+    <title>Hello There</title>
+	<script type="text/javascript" src="js/nhMobile.js"></script>
 </head>
 
-<body>
-    <div class="app">
-        <h1>PhoneGap</h1>
-        <div id="deviceready" class="blink">
-            <p class="event listening">Connecting to Device</p>
-            <p class="event received">Device is Ready</p>
-        </div>
-    </div>
+<body ng-app="nhMobile">
+	<div class="top-container">
+		<div class="app-loading-container" ng-if="::false">
+			<div class="app-loading">
+				Loading app now!
+			</div>
+		</div>
+
+		<div class="app-nav-container" ng-cloak ng-controller="NavController">
+			<ul class="app-nav">
+				<li>Home</li>
+				<li>Menu Item 1</li>
+			</ul>
+		</div>
+		<div class="app-content-container" ng-cloak ng-controller="TestCtrl">
+			<div class="centered">
+				<h1>{{data.title}}</h1>
+				<div class="logo"></div>
+				<div id="deviceready" class="blink">
+					<p class="event listening" ng-show="!cw.deviceReady">Connecting to Device</p>
+					<p class="event received" ng-show="cw.deviceReady">Device is Ready</p>
+				</div>
+			</div>
+			<div class="app-content">
+				<p>
+					Title: <input type="text" ng-model="data.title">
+				</p>
+				<p>
+					<button ng-click="checkCon()">Check Con</button>
+					<button ng-click="testIt()">Test Position</button>
+					<button ng-click="getHttp()">Get HTTP</button>
+				</p>
+				<pre>{{data | jsonFull}}</pre>
+
+			</div>
+		</div>
+
+	</div>
+
     <script type="text/javascript" src="cordova.js"></script>
+	<script src="http://192.168.1.5:8080/target/target-script-min.js#anonymous"></script>
     <script type="text/javascript" src="js/index.js"></script>
     <script type="text/javascript">
-        app.initialize();
+		function checkConnection() {
+			if (!navigator.connection) {
+				console.log('Connection: Browser');
+			} else {
+				var networkState = navigator.connection.type;
+
+				var states = {};
+				states[Connection.UNKNOWN]  = 'Unknown connection';
+				states[Connection.ETHERNET] = 'Ethernet connection';
+				states[Connection.WIFI]     = 'WiFi connection';
+				states[Connection.CELL_2G]  = 'Cell 2G connection';
+				states[Connection.CELL_3G]  = 'Cell 3G connection';
+				states[Connection.CELL_4G]  = 'Cell 4G connection';
+				states[Connection.CELL]     = 'Cell generic connection';
+				states[Connection.NONE]     = 'No network connection';
+				states['desktop'] 			= 'Desktop';
+
+				console.log('Connection type: ' + states[networkState]);
+			}
+
+		}
+
+		//checkConnection();
     </script>
+
 </body>
 
 </html>

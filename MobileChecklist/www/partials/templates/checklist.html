@@ -1,0 +1,14 @@
+<div class="container-checklist" style="{{checklistSettings.bgColor()}} {{checklistSettings.textColor()}}">
+	<div class="checklist-header" ng-include="'partials/templates/checklistChunks/checklist-header.html'">
+
+	</div>
+
+	<div class="container-checklist-details sortable-false" ng-show="checklistSettings.showListDetails" ng-include="'partials/templates/checklistChunks/checklist-details.html'"></div>
+
+	<div class="container-checklist-sharing sortable-false" ng-show="checklistSettings.showShareControls" ng-include="'partials/templates/checklistChunks/checklist-sharing.html'"></div>
+
+	<div class="container-checklist-active" style="{{(checklist.height ? 'height:'+checklist.height+'px' : '')}}" pf-resizable handles="s" onstop="onResizeHeightStop" minheight="50" maxheight="750" cancelselector=".sortable-false, input, textarea, button, i" ui-tree="treeOptions" ng-include="'partials/templates/checklistChunks/checklist-activeItems.html'"></div>
+
+
+	<!--<div class="container-checklist-inactive" ng-show="checklistSettings.showInactiveItems" ng-include="'/partials/templates/checklistChunks/checklist-inactiveItems.html'"></div>-->
+</div>

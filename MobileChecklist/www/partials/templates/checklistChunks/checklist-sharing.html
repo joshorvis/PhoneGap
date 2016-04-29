@@ -1,0 +1,26 @@
+<h4>Shared with:</h4>
+<ul>
+	<li ng-repeat="(id,rights) in clShares">
+		<div class="controls-shareItem pull-right">
+			<select ng-model="rights" ng-options="opt.$id as opt.$value for opt in shareOptions" ng-change="updateListUserRights(id,rights)" class="input-small"></select>
+
+			<i class="fa fa-fw fa-times" ng-click="removeListUser(id)"></i>
+		</div>
+		{{getUserInfo(id).name}}
+		<!--<pre>{{[id,rights] | jsonFull}}</pre>-->
+	</li>
+</ul>
+<div class="form-checklist-sharing nowrap">
+	Add User: <span ng-controller="Select2Controller"><input id="input-shared-user" ui-select2="allUsers" ng-model="listUsers.shared" class="input-large"/></span>
+</div>
+
+
+<!--<h4>Followed by: (these people have read-only access)</h4>
+<ul>
+	<li ng-repeat="user in clFollows">
+		{{getUserInfo(user.$value).name}} <i class="fa fa-fw fa-times" ng-click="removeListUser('followed',user)"></i>
+	</li>
+</ul>
+<div>
+	Add <span ng-controller="Select2Controller"><input id="input-followed-user" ui-select2="users" ng-model="listUsers.followed" class="input-large"/></span>
+</div>-->

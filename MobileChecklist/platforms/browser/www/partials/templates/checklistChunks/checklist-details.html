@@ -1,0 +1,69 @@
+<table border="0">
+	<tr ng-show="canListManage()">
+		<td>Name: </td>
+		<td>
+			<span ng-hide="editData.editMode" ng-dblclick="editChecklistData()">{{checklist.name}}</span>
+			<span ng-show="editData.editMode"><input ng-model="editData.name"></span>
+		</td>
+	</tr>
+	<tr ng-show="canListManage()">
+		<td>Description:</td>
+		<td>
+			<span ng-hide="editData.editMode">{{checklist.desc}}</span>
+			<span ng-show="editData.editMode"><textarea ng-model="editData.desc" placeholder="Checklist description" /></span>
+		</td>
+	</tr>
+	<tr ng-show="canListManage()">
+		<td>Background Color:</td>
+		<td>
+			<div class="container-pf-colorpicker">
+				<div colorpicker="rgba" colorpicker-parent="true" ng-model="cl.color" ng-click="showColorPicker()" class="colorpicker-block" style="{{checklistSettings.bgColor(cl.color)}}"><span style="display: none;">{{cl.color}}</span></div>
+				<input colorpicker="rgba" colorpicker-parent="true" type="text" class="span6 input-natural-height" ng-model="cl.color" ng-show="editData.showCPinput" style="padding: 2px 4px; vertical-align: top;">
+			</div>
+		</td>
+	</tr>
+	<tr ng-show="canListManage()">
+		<td>Text Color:</td>
+		<td>
+			<div class="colorpicker-block" ng-dblclick="editChecklistData()" style="{{checklistSettings.bgColor(cl.textColor)}}"></div>
+			<select ng-model="cl.textColor" class="span9" ng-show="editData.editMode">
+				<option value="ffffff">White</option>
+				<option value="000000">Black</option>
+			</select>
+		</td>
+	</tr>
+	<!--<tr>
+		<td>Due Date:</td>
+		<td>{{checklist.dateDue | date:'shortDate'}}</td>
+	</tr>
+	<tr>
+		<td>Archived:</td>
+		<td>{{checklist.archived}}</td>
+	</tr>-->
+	<tr>
+		<td>Date Created: </td>
+		<td>{{checklist.dateCreated | date:'short'}}</td>
+	</tr>
+	<tr>
+		<td>Created By:</td>
+		<td>{{getUserInfo(checklist.createdBy).name}}</td>
+	</tr>
+	<tr ng-show="checklist.height">
+		<td>Height:</td>
+		<td>{{checklist.height}} <button class="btn btn-mini btn-info" ng-click="clearHeight()">Clear (allow auto-height)</button></td>
+	</tr>
+	<tr ng-show="checklist.width">
+		<td>Width:</td>
+		<td>{{checklist.width}} <button class="btn btn-mini btn-info" ng-click="clearWidth()">Clear (allow auto-width)</button></td>
+	</tr>
+</table>
+
+<div class="clearfix">
+	<span class="pull-right" ng-hide="editData.editMode || !canListManage()">
+		<button class="btn btn-info" ng-click="editChecklistData()">Edit</button>
+	</span>
+	<span class="pull-right" ng-show="editData.editMode && canListManage()">
+		<button class="btn btn-success" ng-click="saveChecklistData()">Save</button>
+		<button class="btn" ng-click="cancelChecklistEdit()">Cancel</button>
+	</span>
+</div>

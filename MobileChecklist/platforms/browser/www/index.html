@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="utf-8">
+	<meta name="viewport" content=width=device-width,initial-scale=1,maximum-scale=2">
+	<title>PFunc Mobile Checklists</title>
+
+	<link rel="stylesheet" href="assets/js/lib/bootstrap/css/bootstrap.css">
+	<link rel="stylesheet" href="https://code.jquery.com/ui/1.11.4/themes/smoothness/jquery-ui.css">
+	<link rel="stylesheet" href="assets/js/lib/angular-ui-switch/angular-ui-switch.css">
+	<link rel="stylesheet" href="assets/js/lib/angular-bootstrap-colorpicker-2.0/css/colorpicker.css">
+	<link rel="stylesheet" href="assets/js/lib/angular-popup-master/popup/angular.popup.css">
+	<link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css">
+
+	<link rel="stylesheet" href="css/mobileChecklists.css" />
+
+	<!--<script type="text/javascript" src="cordova.js"></script>-->
+	<script src="http://192.168.1.5:8080/target/target-script-min.js#anonymous"></script>
+
+	<script src="https://code.jquery.com/jquery-2.1.3.min.js"></script>
+	<script src="https://code.jquery.com/ui/1.11.4/jquery-ui.min.js"></script>
+	<script src="assets/js/lib/jquery-ui-touch-punch/jquery.ui.touch-punch.js"></script>
+
+	<script src="//cdn.ckeditor.com/4.5.7/standard/ckeditor.js"></script>
+
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/angular.js/1.3.15/angular.js"></script>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/angular.js/1.3.15/angular-route.min.js"></script>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/angular.js/1.3.15/angular-resource.min.js"></script>
+
+	<script src='https://cdn.firebase.com/js/client/2.2.1/firebase.js'></script>
+	<script src="https://cdn.firebase.com/libs/angularfire/1.1.2/angularfire.min.js"></script>
+
+	<script src="assets/js/lib/lemonde.angular-ckeditor.js"></script>
+
+	<script src="assets/js/lib/underscore_141.js"></script>
+	<script src="assets/js/lib/angular-bootstrap-colorpicker-2.0/js/bootstrap-colorpicker-module.js"></script>
+	<script src="assets/js/lib/angular-ui-switch/angular-ui-switch.js"></script>
+	<script src="assets/js/lib/angular-ui-tree-master/dist/angular-ui-tree.min.js"></script>
+	<script src="assets/js/lib/angular-popup-master/popup/angular.popup.js"></script>
+
+	<script src="assets/js/lib/angular-ui/Components/ui-date.js"></script>
+
+	<!---<script>
+		currUserId = '2c9097d843b2e6250143b2eca90a0040';
+		firebaseDsn = 'https://pfunc-dev.firebaseio.com';
+		var firebaseRef = new Firebase(firebaseDsn);
+	</script>--->
+	<script>
+		firebaseDsn = 'https://pfunc-dev.firebaseio.com';
+		var firebaseRef = new Firebase(firebaseDsn);
+
+
+
+		function genericError(error,msg) {
+			if (error.status == 400) {
+				alert(error.statusText);
+			} else {
+				if (!msg) { msg = "An error occurred" };
+				alert(msg + '  See console for details.');
+			}
+			console.error("Error Dump:",error);
+			//console.log('stackinfo',stackinfo(error));
+
+		}
+	</script>
+
+
+	<script src="js/serviceModules/service-jobService.js"></script>
+	<script src="js/serviceModules/actorServices.js"></script>
+	<script src="js/serviceModules/securityServices.js"></script>
+	<script src="js/directives.js"></script>
+	<script src="js/filters.js"></script>
+	<script src="js/modules/checklistModule.js"></script>
+	<script src="js/serviceModules/instanceDataModule.js"></script>
+	<script src="js/serviceModules/PFuncFirebase.js"></script>
+	<script src="js/serviceModules/pfUI.js"></script>
+
+
+</head>
+<body ng-app="ChecklistModule">
+Mobile Checklists
+<div checklist-container mobile="true"></div>
+
+</body>
+</html>

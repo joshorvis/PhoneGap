@@ -1,0 +1,68 @@
+<script type="text/ng-template" id="jobItem_renderer.html">
+	<div class="item-conversion {{getJobTypeClass(job.level)}}">
+		<div style="width: 4%;" >
+			<div ui-tree-handle class="gripHandle"></div>
+		</div>
+		<div style="width: 4%;" ng-show="job.converted">
+			<i class="fa fa-fw fa-check"></i>
+		</div>
+		<div style="width: 40%;">
+			<span ng-hide="job.editName" class="fake-link" ng-click="toggleEdit('name',job)">{{job.name}}</span>
+			<input ng-show="job.editName" type="text" ng-model="job.name" placeholder="Job Name">
+		</div><div style="width: 20%;">
+			<span ng-hide="job.editDate" class="fake-link" ng-click="toggleEdit('date',job)">{{job.dueDate | date:'shortDate'}}</span>
+			<input ng-show="job.editDate" type="text" ng-model="job.dueDate" placeholder="Due date" ui-date="{ dateFormat: 'mm/dd/y', defaultDate: null }" autocomplete="off">
+		</div><div>
+			<span ng-hide="job.editOwner" class="fake-link" ng-click="toggleEdit('owner',job)">{{getUserInfo(job.owner).name}}</span>
+			<select ng-show="job.editOwner" ng-options="u.id as u.name for u in (activeUsers | themAndMe:{userId:conversionData.userId,instanceId:conversionData.instanceId})" ng-model="job.owner"></select>
+		</div>
+
+	</div>
+
+	<ul ui-tree-nodes ng-model="job.children" class="list-noBullets" ng-if="job.children">
+		<li ui-tree-node ng-repeat="job in job.children" ng-include="'jobItem_renderer.html'"></li>
+	</ul>
+
+
+</script>
+
+
+<div class="modal-content">
+	<div class="modal-header">
+		<div class="pull-right">
+			<button type="button" class="btn-job-win-ctrl closeWin" ng-click="cancelEdit()"><i class="fa fa-times fa-fw"></i></button>
+		</div>
+		<h3>Convert "{{conversionData.srcItem.name}}" to Job</h3>
+	</div>
+	<div class="modal-body">
+		<div class="modal-form">
+			<div class="noHilite">
+				<div ng-if="!conversionData.parentJobType">
+					<label>Parent Job:</label>
+					<span ng-controller="Select2Controller"><input id="input-newParent" ui-select2="parentJobs" ng-model="conversionData.parentJob" class="input-large" /></span>
+
+					<div class="alert alert-danger" ng-show="errordata.newParent">{{errordata.newParent}}</div>
+				</div>
+
+				<div ng-if="conversionData.parentJobType">
+
+					<div class="selectedParentJob {{getParentColorClass()}}">
+						<button class="btn btn-info pull-right" ng-click="changeParentJob()">Change Parent Job</button>
+						Parent Job: {{conversionData.parentJob.name}}
+					</div>
+
+					<div ui-tree="treeOptions">
+						<ul ui-tree-nodes ng-model="conversionData.newJobs" class="list-noBullets" style="margin-top: 10px; margin-left: 20px;">
+							<li ui-tree-node ng-repeat="job in conversionData.newJobs" ng-include="'jobItem_renderer.html'"></li>
+						</ul>
+					</div>
+				</div>
+
+			</div>
+		</div>
+	</div>
+	<div class="modal-footer">
+		<button class="btn btn-primary" ng-click="doConversion()" ng-disabled="isSaving">Convert to Job</button>
+		<button class="btn" ng-click="cancelEdit()">Cancel</button>
+	</div>
+</div>
