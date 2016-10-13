@@ -7,8 +7,12 @@
         <param name="browser-package" value="Device" />
     </feature>
     <name>MobileChecklists</name>
-    <description>Hello World sample application that responds to the deviceready event.</description>
-    <author email="support@phonegap.com" href="http://phonegap.com">PhoneGap Team</author>
+    <description>
+  	Test Application using the mobile checklists from PFunc
+  </description>
+    <author email="jorvis@nerdyhippie.com" href="http://nerdyhippie.com">
+  	Nerdy Hippie, LLC
+  </author>
     <content src="index.html" />
     <preference name="DisallowOverscroll" value="true" />
     <preference name="android-minSdkVersion" value="14" />

@@ -172,7 +172,7 @@ as.service('pfUserService',['$rootScope','$resource','$q','$popup',function($roo
 		,activeUsers: _activeUsers
 		,currentUser: _currentUser
 		,getCurrentUser: function(cb,ecb) {
-			//console.log('firing getCurrentUser');
+			console.log('firing getCurrentUser');
 			cb = cb || angular.noop;
 			ecb = ecb || angular.noop;
 
@@ -181,6 +181,8 @@ as.service('pfUserService',['$rootScope','$resource','$q','$popup',function($roo
 			userResource.getCurrentUser(
 				{}
 				,function(data) {
+					console.log('response from getCurrentUser');
+					console.log(data);
 					//_currentUser = {};
 					for (var prop in data) {
 						if (data.hasOwnProperty(prop)) _currentUser[prop] = data[prop];
@@ -254,7 +256,6 @@ as.service('pfUserService',['$rootScope','$resource','$q','$popup',function($roo
 			});
 		}
 		,getUserInfoByUsername: function(username) {
-			userId = userId || _currentUser.id;
 			return _.find(_allUsers,function(item) {
 				return item.username === username;
 			});
